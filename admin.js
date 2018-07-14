@@ -33,22 +33,21 @@ router.get('/rooms/edit/', function (req, res) {
 
 
 router.route('/rooms/edit/:id')
-    .get(function (req, res) {
+    .all(function (req, res, next) {
         const roomId = req.params.id
         const room = _.find(rooms, r => r.id === roomId)
         if (!room) {
             res.sendStatus(404)
             return
         }
-        res.render('edit', {room})
+        // se dispone de room para ser utilizado por las siguientes funciones de esta cadena
+        res.locals.room = room;
+        next()
+    })
+    .get(function (req, res) {
+        res.render('edit')
     }).post(function (req, res) {
-        const roomId = req.params.id
-        let room = _.find(rooms, r => r.id === roomId)
-        if (!room) {
-            res.sendStatus(404)
-            return
-        }
-        room.name = req.body.name
+        res.locals.room.name = req.body.name
 
         res.redirect(`${req.baseUrl}/rooms`)
 })
