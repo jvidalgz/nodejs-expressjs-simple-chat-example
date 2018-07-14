@@ -27,7 +27,7 @@ router.post('/rooms/add', function (req, res) {
     }
     rooms.push(room)
 
-    res.redirect('/admin/rooms')
+    res.redirect(`${req.baseUrl}/rooms`)
 })
 
 router.post('/rooms/edit/:id', function (req, res) {
@@ -39,13 +39,13 @@ router.post('/rooms/edit/:id', function (req, res) {
     }
     room.name = req.body.name
 
-    res.redirect('/admin/rooms')
+    res.redirect(`${req.baseUrl}/rooms`)
 })
 
 router.get('/rooms/delete/:id', function (req, res) {
     const roomId = req.params.id
     rooms = rooms.filter(r => r.id !== roomId)
-    res.redirect('/admin/rooms')
+    res.redirect(`${req.baseUrl}/rooms`)
 })
 
 router.get('/rooms/edit/:id', function (req, res) {
