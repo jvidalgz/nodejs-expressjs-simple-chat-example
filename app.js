@@ -16,7 +16,7 @@ app.get('/', function(req, res){
 
 
 const adminRouter = require('./admin')
-app.use(adminRouter)
+app.use('/admin', adminRouter)
 
 
 app.listen(3000, function(){
