@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 
 app.set('views', './views')
 app.set('view engine', 'pug')
+app.use(require('./logging'))
 // middleware para retornar archivos estáticos (http://expressjs.com/es/starter/static-files.html)
 app.use(express.static('public'))
 app.use(express.static('node_modules/bootstrap/dist'))
